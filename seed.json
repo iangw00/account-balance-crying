@@ -1,0 +1,45 @@
+[
+    {
+        "id":1,
+        "title": "Pocket Money",
+        "amount": 95000,
+        "type": "income"
+    },
+
+
+    {
+        "id":2,
+        "title": "Tap&Go card",
+        "amount": 5000,
+        "type": "expense"
+    },
+
+    {
+        "id": 3,
+        "title": "MTN internet pack",
+        "amount": 10000,
+        "type":"expense"
+    },
+
+
+    {
+        "id": 4,
+        "title": "Lunch at local resto",
+        "amount": 2500,
+        "type": "expense"
+    },
+
+    {
+        "id": 6,
+        "title": "Supermarket essentials",
+        "amount": 8500,
+        "type": "expense"
+    },
+
+    {
+        "id": 7,
+        "title": "Ibiraka / side hustle",
+        "amount": 55000,
+        "type": "income"
+    }
+]
