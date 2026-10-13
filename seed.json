@@ -1,45 +1,107 @@
-[
+ [
     {
-        "id":1,
-        "title": "Pocket Money",
-        "amount": 95000,
-        "type": "income"
+        "id": "txn_001",
+        "description": "Lunch at food court",
+        "amount": 4500,
+        "category": "Food",
+        "date": "2026-10-01",
+        "createdAt": "2026-10-01T08:30:00.000Z",
+        "updatedAt": "2026-10-01T08:30:00.000Z"
     },
 
 
     {
-        "id":2,
-        "title": "Tap&Go card",
+        "id": "txn_002",
+        "description": "Reflective thinking book",
+        "amount": 18500,
+        "category": "Books",
+        "date": "2026-10-02",
+        "createdAt": "2026-10-02T10:15:00.000Z",
+        "updatedAt": "2026-10-02T10:15:00.000Z"
+    },
+
+
+    {
+        "id": "txn_003",
+        "description": "Tap and Go card refill",
         "amount": 5000,
-        "type": "expense"
-    },
-
-    {
-        "id": 3,
-        "title": "MTN internet pack",
-        "amount": 10000,
-        "type":"expense"
+        "category": "Transport",
+        "date": "2026-10-03",
+        "createdAt": "2026-10-03T14:20:00.000Z",
+        "updatedAt": "2026-10-03T14:20:00.000Z"
     },
 
 
     {
-        "id": 4,
-        "title": "Lunch at local resto",
+        "id": "txn_004",
+        "description":"weekend outing with friends",
+        "amount": 15000,
+        "category": "Entertainment",
+        "date": "2026-10-04",
+        "createdAt": "2026-10-04T18:00:00.000Z",
+        "updatedAt": "2026-10-04T18:00:00.000Z"
+    },
+
+
+    {
+        "id": "txn_005",
+        "description": "pool table loss fees",
+        "amount": 4000,
+        "category": "Entertainment",
+        "date": "2026-10-09",
+        "createdAt": "2026-10-09T16:45:00.000Z",
+        "updatedAt": "2026-10-09T16:45:00.000Z"
+    },
+
+
+    {
+        "id": "txn_006",
+        "description":"coffee study session",
+        "amount": 9000,
+        "category": "Food",
+        "date": "2026-10-06",
+        "createdAt": "2026-10-06T11:45:00.000Z",
+        "updatedAt": "2026-10-06T11:45:00.000Z"
+    },
+
+
+    {
+        "id": "txn_007",
+        "description": "Moto money for trip to town",
+        "amount": 5000,
+        "date": "2026-10-06",
+        "category": "Transport",
+        "createdAt": "2026-10-06T15:30:00.000Z",
+        "updatedAt": "2026-10-08T15:30:00.00Z"
+    },
+
+    {
+        "id": "txn_008",
+        "description": "Groceries from kimironko market",
+        "amount": 19000,
+        "category": "Food",
+        "date": "2026-10-12",
+        "createdAt": "2026-10-12T11:35:00.000Z",
+        "updatedAt": "2026-10-12T11:35:00.000Z"
+    },
+
+    {
+        "id": "txn_009",
+        "description": "Spotify subscription",
         "amount": 2500,
-        "type": "expense"
+        "category": "Fee",
+        "date": "2026-10-12",
+        "createdAt": "2026-10-12T18:20:00.000Z",
+        "updatedAt": "2026-10-12T18:20:00.000Z"
     },
 
     {
-        "id": 6,
-        "title": "Supermarket essentials",
-        "amount": 8500,
-        "type": "expense"
-    },
-
-    {
-        "id": 7,
-        "title": "Ibiraka / side hustle",
-        "amount": 55000,
-        "type": "income"
+        "id": "txn_010",
+        "description": "Netflix monthly subscription",
+        "amount": 15000,
+        "category": "Fee",
+        "date": "2026-10-19",
+        "createdAt": "2026-10-19T03:10:00.000Z",
+        "updatedAt": "2026-10-19T03:10:00.000Z"
     }
-]
+ ]
