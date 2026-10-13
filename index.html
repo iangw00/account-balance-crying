@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Finance Tracker</title>
+    <link rel= "stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header class="app-header"
+        <h1>Finance Tracker for Students</h1>
+        <p>Manage your income, keep note of expenses and your balance.</p>
+    </header>
+    
+
+
+
+    <main class="container">
+        <!-- top summary cards -->
+         <section class="summary-cards" aria-label="Financial summaries">
+            <div class="card">
+                <h3>Total balance</h3>
+                <p id="total-balance" aria-live="polite">Rwf 0</p>
+            </div>
+
+            <div class="card"
+                <h3>Total income</h3>
+                <p id="total-income" aria-live="polite">Rwf 0</p>
+            <div class="card"
+                <h3>Total expenses</h3>
+                <p id="total-expenses" aria-live="polite">Rwf 0</p>
+            </div>
+        </section>
+
+
+        <!-- form to add new transactions -->
+         <section class="form-section"
+         <h2>Add transaction</h2>
+         <form id="transaction-form">
+            <div class="form-group">
+                <label for="title">Description</label>
+                 <input type="text" id="title" placeholder="Description (e.g., Pocket money, Food)" required>
+            <small id="title-error" class="error-msg"></small>
+            </div>
+
+
+            <div class="form-group"
+                <label for="title">Description</label>
+                <input type="text" id="title" placeholder="e.g., Pocketmoney, Food" required>
+                <small id="amount-error" class="error-msg"></small>
+            </div>
+
+            <div class="form-group">
+                <label for="type">Type</label>
+                <select id="type">
+                        <option value="expense">Expense</option>
+                        <option value="income">Income</option>
+                    </select>
+                 </div>
+
+                 <button type="submit"> Add Record</button>
+            </form>
+        </section>
+
+
+        <!-- Search & Filter section -->
+        <section class="search-section">
+            <label for="search-input">Search Transactions (Regex supported)</label>
+            <input type="text" id="search-input" placeholder="Search by title or amount...">
+        </section>
+
+
+        <!-- Transaction history -->
+        <section class="list-section">
+            <h2>Transaction history</h2>
+            <ul id="transaction-list" aria-live="polite"
+                <! -- Populated via Javascript-->
+            </ul>
+        </section>
+    </main>
+
+            <select id="type">
+                <option value="expense">Expense</option>
+                <option value="income">Income</option>
+            </select>
+
+            <button type="submit">Add Record</button>
+        </form>
+    </section>
+
+
+<!-- transaction history list container -->
+
+
+<section class="list-section">
+    <h2>Transaction History</h2>
+    <ul id="transaction-list">
+
+        <!-- items get populated here form app.js -->
+    </ul>
+    </section>
+</main>
+
+
+<script src="scripts/app.jss"></script>
+</body>
+</html>
