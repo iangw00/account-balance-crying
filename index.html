@@ -1,108 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Finance Tracker</title>
-    <link rel= "stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    <header class="app-header"
-        <h1>Finance Tracker for Students</h1>
-        <p>Manage your income, keep note of expenses and your balance.</p>
-    </header>
-    
+
+    <!-- skip to content link for accessibility -->
+     <a href="#main-content" class="skip-link">Skip to main content</a>
+
+     <header>
+        <h1>Finance tracker for Students</h1>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="#dashboard" class="nav-link active">Dashboard</a></li>
+                <li><a href="#records" class="nav-link">Transactions></a></li>
+                <li><a href="#form-section" class="nav-link">Add Transaction</a></li>
+                <li><a href="#settings" class="nav-link">Settings</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+            </ul>
+        </nav>
+     </header>
 
 
+     <main id="main-content">
+        <!-- ARIA live region for cap/budget alerts -->
 
-    <main class="container">
-        <!-- top summary cards -->
-         <section class="summary-cards" aria-label="Financial summaries">
-            <div class="card">
-                <h3>Total balance</h3>
-                <p id="total-balance" aria-live="polite">Rwf 0</p>
+        <div id="budget-announcer" aria-live="polite" class="sr-only"></div>
+
+        <!-- dashboard section -->
+
+        <section id="dashboard" class="app-section">
+            <h2>Financial dashboard</h2>
+            <div class="stats-grid">
+                <h3>Total records</h3>
+                <p id="stat-total-records">0</p>
             </div>
-
-            <div class="card"
-                <h3>Total income</h3>
-                <p id="total-income" aria-live="polite">Rwf 0</p>
-            <div class="card"
-                <h3>Total expenses</h3>
-                <p id="total-expenses" aria-live="polite">Rwf 0</p>
+            <div class="stat-card">
+                <h3>Top category</h3>
+                <p id="stat-top-category">None</p>
             </div>
-        </section>
+        </div>
+    </section>
 
+    <!-- Add/edit transaction form section -->
 
-        <!-- form to add new transactions -->
-         <section class="form-section"
-         <h2>Add transaction</h2>
-         <form id="transaction-form">
+    <section id="form-section" class="app-section">
+        <h2>Add new transaction</h2>
+        <form id="transaction-form" novalidate>
             <div class="form-group">
-                <label for="title">Description</label>
-                 <input type="text" id="title" placeholder="Description (e.g., Pocket money, Food)" required>
-            <small id="title-error" class="error-msg"></small>
-            </div>
-
-
-            <div class="form-group"
-                <label for="title">Description</label>
-                <input type="text" id="title" placeholder="e.g., Pocketmoney, Food" required>
-                <small id="amount-error" class="error-msg"></small>
+                <label for="description">Description</label>
+                <input type="text" id="description" name="description" required placeholder="e.g., Lunch at campus cafeteria">
+                <span class="error-message" id="description-error"></span>
             </div>
 
             <div class="form-group">
-                <label for="type">Type</label>
-                <select id="type">
-                        <option value="expense">Expense</option>
-                        <option value="income">Income</option>
-                    </select>
-                 </div>
+                <label for="amount">Amount (Rwf)</label>
+                <input type="number" id="amount" name="amount" required placeholder="e.g., 4500">
+                <span class="error-message" id="amount-error"></span>
+            </div>
 
-                 <button type="submit"> Add Record</button>
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" name="category" required>
+                    <option value="">Select category...</option>
+                    <option value="Books">Books</option>
+                    <option value="Food">Food</option>
+                    <option value="Transport">Transport</option>
+                    <option value=""Entertainment">Entertainment</option>
+                    <option value="Fees">Fees</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <span class="error-message" id="category-error"></span>
+                </div>
+
+                <div class="form-group">
+                     <label for="date">Date</label>
+                     <input type="date" id=date" name="date" required>
+                     <span class="error-message" id="date-error"></span>
+                </div>
+
+                <button type="submit">Save transaction</button>
             </form>
         </section>
 
 
-        <!-- Search & Filter section -->
-        <section class="search-section">
-            <label for="search-input">Search Transactions (Regex supported)</label>
-            <input type="text" id="search-input" placeholder="Search by title or amount...">
-        </section>
+        <!-- Records table & search section -->
+         <section id="records" class="app-section">
+            <h2> Transaction Records</h2>
+            <div class="search-sort-bar">
+                <input type="text" id="regex-search" placeholder="Live regex search" aria-label="Search transactions">
+                <select id="sort-select" aria-label="Sort transactions">
+                    <option value="date-descending">Date (Newest)</option>
+                    <option value="date-ascending">Date (Oldest)</option>
+                    <option value="amount-descending">Amount (Highest)</option>
+                    <option value="amount-ascending">Amount (Lowest)</option>
+                    <option value="descending-az">Description (A-Z)</option>
+                </select>
+            </div>
 
+            <div class="table-responsive">
+                <table id="transaction table">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Category</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- dynamic rows populated via JS -->
+                    </tbody>
+                </table>
+            </div>
+         </section>
 
-        <!-- Transaction history -->
-        <section class="list-section">
-            <h2>Transaction history</h2>
-            <ul id="transaction-list" aria-live="polite"
-                <! -- Populated via Javascript-->
-            </ul>
-        </section>
-    </main>
+         <!-- settings section -->
+          <section id="settings" class="app-section">
+            <h2>Settings & Data Management</h2>
+            <div class="settings-group">
+                <h3>Currency & Budget cap</h3>
+                <label for="budget-cap-input">Monthly budget cap (Rwf)</label>
+                <input type="number" id="budget-cap-input"placeholder="e.g., 100000">
+            </div>
+            <div class="settings-group data-actions">
+                <button id="export-json-button" type="button">Export JSON Data</button>
+                <label for="import-json-file" class="file-upload-label">Import JSON</label>
+                <input type="file" id="import-json-file" accept=".json" style="display: none;">
+            </div>
+          </section>
 
-            <select id="type">
-                <option value="expense">Expense</option>
-                <option value="income">Income</option>
-            </select>
+          <!-- About section -->
+           <section id="about" class="app-section">
+            <h2>About</h2>
+            <p>Student finances tracker built with vanilla HTML, CSS, and JavaScript.</p>
+            <p>Built by BSE student @ALU Rwanda: Gwiza Ian</p>
+           </section>
+        </main>
 
-            <button type="submit">Add Record</button>
-        </form>
-    </section>
-
-
-<!-- transaction history list container -->
-
-
-<section class="list-section">
-    <h2>Transaction History</h2>
-    <ul id="transaction-list">
-
-        <!-- items get populated here form app.js -->
-    </ul>
-    </section>
-</main>
-
-
-<script src="scripts/app.jss"></script>
+        <script type="module" src="scripts/app.js"></script>
 </body>
 </html>
