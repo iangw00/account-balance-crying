@@ -1,16 +1,40 @@
-// my main list holding all transactions. don't touch outside functions!
-let walletTracker = [];
+// keep track of things here
 
-// getting elements from html so we can manipulate the DOM
+let transactions = []
+let monthlyBudgetCap = 100000; // default rwf budget cap
 
-const totalBalanceDiv = document.getElementById("total-balance");
-const totalIncomeDiv = document,getElementById("total-income");
-const totalExpensesDiv = document.getElementById("total-expenses");
-const transactionListUL = document.getElementById("transaction-list");
-const myForm = document.getElementById("transaction-form");
-const titleBox = document.getElementById("title");
-const amountBox= document.getElementById("amount");
-const typeBox = document.getElementById("type");
-const searchBox = document.getElementById("search-input");
-const titleErrorMsg = document.getElementById("title-error");
-const amountErrorMsg = document.getElementById("amountErrorMsg");
+// load up data when the page first opens;
+async function initializeApp() {
+    try {
+        const savedTransactions = localStorage.getItem ('student_finance_transactions');
+        const savedBudget = localStorage.getItem('student_finance_budget');
+
+        if (savedTransactions) {
+            transctions = JSON.parse(savedTransactions);
+        } else {
+            //pull seed data if local storage is empty
+            const response = await fetch('seed.json');
+            if (!response.ok) {
+                throw new Error('failed to load seed data.');
+            }
+            transactions = await response.json();
+            saveToLocalStorage();
+        }
+
+        if (savedBudget) {
+            monthlyBudgetCap = Number(savedBudget);
+        }
+
+        //update the ui with initial data
+        updateDashboard();
+        renderTransactions(transactions);
+        populateCategoryDropdowns();
+    } catch (error) {
+        console.error('Error initializing app:', error);
+    }
+}
+
+    function saveToLocalStorage() {
+        localStorage.setItem('student_finance_transactions', JSON.strinigify(transactions));
+        localStorage.setItem('student_finance_budget', monthlyBudgetCap.toString());
+}
