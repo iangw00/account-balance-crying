@@ -83,3 +83,61 @@ function updateDashboard() {
         topCategoryElement.textContent = topCategory;
     }
 }
+
+// --- display transactions in the table ---
+
+function renderTransactions(dataToRender) {
+    const tableBody = document.getElementById('transaction-rows');
+    if (!tableBody) return;
+
+    //clear out old rows first
+    tableBody.innerHTML = '';
+
+    // show a message if there's nothing to display 
+    if (dataToRender.length === 0) {
+        tableBody.innerHTML = `
+        <tr>
+            <td colspan="5" style="text-align: center; padding-top: 20px; padding-bottom: 20px;">
+            No transactions found.
+            </td>
+        </tr>
+    `;
+    return;
+    }
+
+    // loop through and build each row
+    dataToRender.forEach(item => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+        <td>${item.description}</td>
+        <td>${Number(item.amount).toLocaleString()} Rwf</td>
+        <td>${item.category}</td>
+        <td>${item.date}</td>
+        <td>
+            <button type="button" class="delete-button
+    </td>
+`;
+
+tableBody.appendChild(row);
+    });
+}
+
+// sort transactions by date, amount, or description
+function sortTransactions(criteria) {
+    const sortedList = [...transactions];
+
+    if(criteria === 'date-descending') {
+        sortedList.sort((a,b) => new Date(b.date) - new Date(a.date));
+    } else if (criteria === 'date-ascending') {
+        sortedList.sort((a,b) => new Date(a.date) - new Date(b.date));
+    } else if (criteria ==='amount-descending') {
+        sortedList.sort((a,b) => Number(b.amount) - Number(a.amount));
+    } else if (criteria === 'amount-ascending') {
+        sortedList.sort((a,b) => Number(a.amount) - Number(b.amount));
+    } else if (criteria === 'description-ascending') {
+        sortedList.sort((a,b) => a.description.localeCompare(b.description));
+    }
+
+    renderTransactions(sortedList);
+}
