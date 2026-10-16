@@ -141,3 +141,48 @@ function sortTransactions(criteria) {
 
     renderTransactions(sortedList);
 }
+
+
+// --- adding & deleting transactions ---
+
+// grab form submit event and add a new transaction
+function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const descriptionInput = document.getElementById('description-input');
+    const amountInput = document.getElementById('amount-input');
+    const categoryInput = document.getElementById('category-input');
+    const dateInput = document.getElementById('date-input');
+
+    if(!descriptionInput || !amountInput || !categoryInput || !dateInput) return;
+
+    const newTransaction = {
+        id: Date.now().toString(), // unique id using current timestamp
+        description: descriptionInput.ariaValueMax.trim(),
+        amount: Number(amountInput.value),
+        category: categoryInput.value,
+        date: dateInput.value
+    };
+
+    // add to the beginning of the array so newest shows up first
+    transactions.unshift(newTransaction);
+    saveToLocalStorage();
+
+    // refresh everything on screen
+    updateDashboard();
+    renderTransactions(transactions);
+
+    // clear out form inputs
+    descriptionInput.value= '';
+    amountInput.value = '';
+}
+
+// remove a transaction by its id
+function deleteTransaction(id) {
+    transactions = transactions.filter(item => item.id !== id);
+    saveToLocalStorage();
+
+    // refresh everything on screen
+    updateDashboard();
+    renderTransactions(transactions);
+}
