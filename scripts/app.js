@@ -186,3 +186,41 @@ function deleteTransaction(id) {
     updateDashboard();
     renderTransactions(transactions);
 }
+
+
+// --- Category dropdowns & event listeners ---
+
+// populate dropdowns with standard categories
+function populateCategoryDropdowns() {
+    const categoryInput = document.getElementById('category-input');
+    if (!categoryInput) return;
+
+    const categories = ['Food & Groceries', 'Transport (Tap&Go)', 'Utilities & Airtime', 'Academic & Books', 'Leisure & Personal', 'Other'];
+
+    categoryInput.innerHTML= '';
+    categories.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat;
+        option.textContent = cat;
+        categoryInput.appendChild(option);
+    });
+}
+
+// run initialization when the page finishes loading
+document.addEventListener('DOMContentLoaded', () => {
+    initializeApp();
+
+    // hook up the form submit listener
+    const transactionForm = document.getElementById('transaction-form');
+    if (transactionForm) {
+        transactionForm.addEventListener('submit', handleFormSubmit);
+    }
+
+    // setup the sort dropdown listener
+    const sortSelect = document.getElementById('sort-select');
+    if (sortSelect) {
+        sortSelect.addEventListener('change', (e) => {
+            sortTransactions(e.target.value);
+        });
+    }
+});
