@@ -1,5 +1,4 @@
 // keep track of things here
-
 let transactions = []
 let monthlyBudgetCap = 100000; // default rwf budget cap
 
@@ -239,8 +238,45 @@ function populateCategoryDropdowns() {
         }
     }
 
-// run initialization when the page finishes loading
-document.addEventListener('DOMContentLoaded', () => {
+    // --- export & import ---
+    function exportJSONData() {
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(transactions));
+        const downloadAnchor = document.createElement('a');
+        downloadAnchor.href = dataStr;
+        downloadAnchor.download = "transactions.json";
+        downloadAnchor.click();
+    }
+
+    function importJSONData(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader ();
+        reader.onload = function(e) {
+            transactions = JSON.parse(e.target.result);
+            localStorage.setItem('student_finance_transactions', JSON.stringify(transactions));
+            renderTransactions(transactions);
+            updateDashboard();
+        };
+        reader.readAsText(file);
+    }
+
+
+    // setup export button
+    const exportButton = document.getElementById('export-button');
+    if (exportButton) {
+        exportButton.addEventListener('click', exportJSONData);
+    }
+
+    // setup import input
+    const importInput = document.getElementById('import-file-input');
+    if (importInput) {
+        importInput.addEventListener('change', importJSONData);
+    }
+
+
+    // run initialization when the page finishes loading
+    document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
 
     // set up the form submit listener
