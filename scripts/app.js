@@ -84,6 +84,24 @@ function updateDashboard() {
     }
 }
 
+// --- live regex search ---
+
+// filter transactions using live regex search
+
+function filterTransactions(pattern) {
+    if (!pattern.trim()) {
+        renderTransactions(transavtions);
+        return;
+    }
+
+    try {
+        const regex = new RegExp(pattern, 'i');
+        const filtered = transactions.filter(t => regex.test(t.description) || regex.test(t.category));
+        renderTransactions(filtered);
+    } catch (e) {
+        //invalid regex pattern while typing, ignore error
+    }
+}
 // --- display transactions in the table ---
 
 function renderTransactions(dataToRender) {
@@ -205,12 +223,27 @@ function populateCategoryDropdowns() {
         categoryInput.appendChild(option);
     });
 }
+    // filter transactions using live regex search
+    function filterTransactions(pattern) {
+        if (!pattern.trim()) {
+            renderTransactions(transactions);
+            return;
+        }
 
+        try {
+            const regex = new RegExp(pattern, 'i');
+            const filtere = transactions.filter(t => regex.test(t.description) || regex.test(t.category));
+            renderTransactions(filtered);
+        } catch (e) {
+            // invalid regex pattern while typing, ignore error
+        }
+    }
+    
 // run initialization when the page finishes loading
 document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
 
-    // hook up the form submit listener
+    // set up the form submit listener
     const transactionForm = document.getElementById('transaction-form');
     if (transactionForm) {
         transactionForm.addEventListener('submit', handleFormSubmit);
@@ -221,6 +254,14 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sortSelect) {
         sortSelect.addEventListener('change', (e) => {
             sortTransactions(e.target.value);
+        });
+    }
+
+    // setup live regex search listener
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            filterTransactions(e.target.value);
         });
     }
 });
