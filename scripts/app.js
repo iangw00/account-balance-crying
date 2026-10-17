@@ -238,7 +238,7 @@ function populateCategoryDropdowns() {
             // invalid regex pattern while typing, ignore error
         }
     }
-    
+
 // run initialization when the page finishes loading
 document.addEventListener('DOMContentLoaded', () => {
     initializeApp();
